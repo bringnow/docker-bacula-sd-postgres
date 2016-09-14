@@ -16,7 +16,7 @@ RUN emerge -q sys-fs/inotify-tools app-backup/bacula
 VOLUME /etc/bacula
 VOLUME /var/lib/bacula
 
-ADD create_dhparam.sh entrypoint.sh /usr/local/bin
+COPY create_dhparam.sh entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT /usr/local/bin/entrypoint.sh
 
