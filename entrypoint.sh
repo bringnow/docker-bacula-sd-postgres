@@ -26,5 +26,6 @@ ${BACULA_SD_COMMAND} || die "Failed to start bacula-sd"
 
 # Check if config or certificates were changed and restart if necessary
 while inotifywait -q -r --exclude '\.git/' -e modify -e create -e delete $BACULA_SD_CONFIG /etc/letsencrypt; do
-  # TODO Reload SD
+  # TODO Actually reload SD
+  echo "Need to restart bacula-sd manually (Not implemented in Dockerfile yet)"
 done
