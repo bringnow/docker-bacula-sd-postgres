@@ -1,7 +1,10 @@
-FROM alpine:3.4
+FROM ubuntu:16.10
 MAINTAINER Fabian Köster <mail@fabian-koester.com>
 
-RUN apk add --no-cache bacula-pgsql inotify-tools openssl
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    bacula-sd-pgsql \
+    inotify-tools \
+ && rm -rf /var/lib/apt/lists/*
 
 VOLUME /etc/bacula
 VOLUME /var/lib/bacula
