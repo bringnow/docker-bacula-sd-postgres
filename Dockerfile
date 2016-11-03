@@ -4,6 +4,8 @@ MAINTAINER Fabian Köster <mail@fabian-koester.com>
 RUN apt-get update && apt-get install -y --no-install-recommends \
     bacula-sd-pgsql \
     inotify-tools \
+    openssl \
+    ca-certificates \
  && rm -rf /var/lib/apt/lists/*
 
 VOLUME /etc/bacula
