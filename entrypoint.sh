@@ -24,6 +24,8 @@ ${BACULA_SD_COMMAND} -t || die "Configuration test failed"
 # Launch bacula-sd
 ${BACULA_SD_COMMAND} || die "Failed to start bacula-sd"
 
+log "Bacula SD started."
+
 # Check if config or certificates were changed and restart if necessary
 while inotifywait -q -r --exclude '\.git/' -e modify -e create -e delete $BACULA_SD_CONFIG /etc/letsencrypt; do
   # TODO Actually reload SD
