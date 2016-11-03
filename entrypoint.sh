@@ -1,11 +1,11 @@
-#! /bin/bash
+#! /bin/sh
 
-die() {
+die () {
     echo >&2 "[`date +'%Y-%m-%d %T'`] $@"
     exit 1
 }
 
-log() {
+log () {
   if [[ "$@" ]]; then echo "[`date +'%Y-%m-%d %T'`] $@";
   else echo; fi
 }
@@ -27,5 +27,5 @@ ${BACULA_SD_COMMAND} || die "Failed to start bacula-sd"
 # Check if config or certificates were changed and restart if necessary
 while inotifywait -q -r --exclude '\.git/' -e modify -e create -e delete $BACULA_SD_CONFIG /etc/letsencrypt; do
   # TODO Actually reload SD
-  echo "Need to restart bacula-sd manually (Not implemented in Dockerfile yet)"
+  log "Need to restart bacula-sd manually (Not implemented in Dockerfile yet)"
 done
