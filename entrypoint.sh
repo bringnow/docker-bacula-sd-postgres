@@ -1,12 +1,16 @@
 #! /bin/sh
 
 die () {
-    echo >&2 "[`date +'%Y-%m-%d %T'`] $@"
+    log_error $@
     exit 1
 }
 
 log () {
   echo "[`date +'%Y-%m-%d %T'`] $@";
+}
+
+log_error () {
+  echo >&2 "[`date +'%Y-%m-%d %T'`] $@"
 }
 
 BACULA_SD_CONFIG="/etc/bacula/bacula-sd.conf"
@@ -28,6 +32,6 @@ log "Bacula SD started."
 # Check if config or certificates were changed and restart if necessary
 while inotifywait -q -r --exclude '\.git/' -e modify -e create -e delete /etc/bacula /etc/letsencrypt; do
   log "Restarting bacula-sd because of configuration/certificate changes..."
-  pkill -F ${BACULA_SD_PID_FILE} || die "Failed to kill bacula-sd"
-  ${BACULA_SD_COMMAND} || die "Failed to restart bacula-dir"
+  pkill -F ${BACULA_SD_PID_FILE} || log_error "Failed to kill bacula-sd"
+  ${BACULA_SD_COMMAND} || die "Failed to restart bacula-sd"
 done
