@@ -31,7 +31,9 @@ log "Bacula SD started."
 
 # Check if config or certificates were changed and restart if necessary
 while inotifywait -q -r --exclude '\.git/' -e modify -e create -e delete /etc/bacula /etc/letsencrypt; do
-  log "Restarting bacula-sd because of configuration/certificate changes..."
+  log "Configuration changes detected. Will restart bacula-sd in 60 seconds..."
+  sleep 60
   pkill -F ${BACULA_SD_PID_FILE} || log_error "Failed to kill bacula-sd"
+  sleep 10
   ${BACULA_SD_COMMAND} || die "Failed to restart bacula-sd"
 done
