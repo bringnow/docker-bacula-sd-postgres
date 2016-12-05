@@ -36,4 +36,5 @@ while inotifywait -q -r --exclude '\.git/' -e modify -e create -e delete /etc/ba
   pkill -F ${BACULA_SD_PID_FILE} || log_error "Failed to kill bacula-sd"
   sleep 10
   ${BACULA_SD_COMMAND} || die "Failed to restart bacula-sd"
+  sleep 20
 done
