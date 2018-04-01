@@ -1,8 +1,8 @@
-FROM ubuntu:16.10
+FROM ubuntu:18.04
 MAINTAINER Fabian Köster <mail@fabian-koester.com>
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    bacula-sd-pgsql \
+    bacula-sd \
     inotify-tools \
     openssl \
     ca-certificates \
